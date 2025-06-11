@@ -20,14 +20,15 @@ def generate_test_cases():
         return jsonify({"error": "Feature description is required."}), 400
 
     try:
-        response = openai.ChatCompletion.create(
+        client = openai.OpenAI()
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a QA expert."},
                 {"role": "user", "content": f"Generate detailed test cases and edge cases for this feature: {feature}"}
             ]
         )
-        result = response["choices"][0]["message"]["content"]
+        result = response.choices[0].message.content
         return jsonify({"test_cases": result})
 
     except Exception as e:
