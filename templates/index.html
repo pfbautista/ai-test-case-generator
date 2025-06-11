@@ -17,9 +17,8 @@
       const data = await response.json();
       document.getElementById("output").textContent = data.test_cases || data.error;
     }
-  </script>
-  <script>
-document.getElementById("downloadBtn").addEventListener("click", async () => {
+
+    document.getElementById("downloadBtn").addEventListener("click", async () => {
   const feature = document.getElementById("feature").value;
   if (!feature) {
     alert("Please enter a feature description.");
@@ -53,7 +52,7 @@ document.getElementById("downloadBtn").addEventListener("click", async () => {
     alert("An error occurred while downloading the test cases.");
   }
 });
-</script>
+  </script>
 </head>
 <body>
   <h1>AI-Powered QA Assistant</h1>
