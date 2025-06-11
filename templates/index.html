@@ -5,54 +5,57 @@
   <meta charset="UTF-8">
   <title>AI-Powered QA Assistant</title>
   <script>
-    async function generateTestCases() {
-      const feature = document.getElementById("feature").value;
-      const response = await fetch("/generate", {
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("downloadBtn").addEventListener("click", async () => {
+    const feature = document.getElementById("feature").value;
+    if (!feature) {
+      alert("Please enter a feature description.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/download", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ feature })
       });
-      const data = await response.json();
-      document.getElementById("output").textContent = data.test_cases || data.error;
+
+      if (!response.ok) {
+        throw new Error("Failed to download CSV.");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "test_cases.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while downloading the test cases.");
     }
+  });
 
-    document.getElementById("downloadBtn").addEventListener("click", async () => {
-  const feature = document.getElementById("feature").value;
-  if (!feature) {
-    alert("Please enter a feature description.");
-    return;
-  }
-
-  try {
-    const response = await fetch("/download", {
+  window.generateTestCases = async () => {
+    const feature = document.getElementById("feature").value;
+    const response = await fetch("/generate", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({ feature })
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to download CSV.");
-    }
-
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "test_cases.csv";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    window.URL.revokeObjectURL(url);
-
-  } catch (error) {
-    console.error(error);
-    alert("An error occurred while downloading the test cases.");
-  }
+    const data = await response.json();
+    document.getElementById("output").textContent = data.test_cases || data.error;
+  };
 });
-  </script>
+</script>
+
 </head>
 <body>
   <h1>AI-Powered QA Assistant</h1>

@@ -29,7 +29,7 @@ def generate_test_cases():
     try:
         client = openai.OpenAI()
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are a QA expert. Respond only in CSV format with columns: ID, Title, Expected Result."},
                 {"role": "user", "content": f"Generate detailed test cases and edge cases for this feature: {feature}"}
