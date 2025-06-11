@@ -3,9 +3,14 @@
 from flask import Flask, request, jsonify, render_template
 import openai
 import os
+import logging
 
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @app.route("/")
 def index():
@@ -32,8 +37,9 @@ def generate_test_cases():
         return jsonify({"test_cases": result})
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        logger.error("OpenAI API error: %s", str(e))
+        user_message = "An error occurred while generating test cases. Please try again later or check your OpenAI API usage."
+        return jsonify({"error": user_message}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
-
