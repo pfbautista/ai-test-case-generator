@@ -22,7 +22,7 @@ def generate_test_cases():
     try:
         client = openai.OpenAI()
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a QA expert."},
                 {"role": "user", "content": f"Generate detailed test cases and edge cases for this feature: {feature}"}
