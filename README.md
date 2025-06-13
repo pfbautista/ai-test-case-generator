@@ -18,7 +18,7 @@ This is a Python Flask-based web application that uses OpenAI's GPT model to gen
 
 ## 🖥️ Demo
 
-Try the live app: [Your Heroku App URL](https://ai-qa-assistant-demo-18f70b1113d4.herokuapp.com)
+Try the live app: [Your Heroku App URL](https://ai-test-case-generator-demo-2679b905385f.herokuapp.com)
 
 ---
 
