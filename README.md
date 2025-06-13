@@ -51,8 +51,8 @@ ai_qa_assistant/
 1. **Clone the repo**
 
 ```bash
-git clone git@github.com:YOUR_USERNAME/ai-qa-assistant.git
-cd ai-qa-assistant
+git clone git@github.com:YOUR_USERNAME/ai-test-case-generator.git
+cd ai-test-case-generator
 ```
 
 2. **Create a virtual environment**
