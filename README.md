@@ -1,5 +1,5 @@
 
-# 🤖 AI-Powered QA Assistant
+# 🤖 AI-Powered Test Case Generator
 
 This is a Python Flask-based web application that uses OpenAI's GPT model to generate detailed and structured test cases from plain-language feature descriptions. Designed to help QA Engineers quickly brainstorm test coverage ideas, including edge cases, the app also supports exporting results as a CSV file.
 
